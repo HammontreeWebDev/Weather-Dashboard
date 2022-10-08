@@ -6,17 +6,14 @@ const app = {
     init: () => {
         citySearchID.on('keydown', (event)=> {
             if (event.keyCode === 13) {
-                app.fetchWeather();
+                app.fetchLocation();
             }
         });
     },
-    fetchWeather: (event) => {
-        let cityName = citySearchID.value;
+    fetchLocation: (event) => {
+        let cityName = $('input:text').val();
         let key = '2c8438a889150a71aa165db59d155f28';
-        let lang = 'en';
-        let units = 'imperial';
-        let oneCallurl = `https://api.openweathermap.org/data/3.0/onecall?`;
-        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=orlando,FL,US&appid=${key}`;
+        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},FL,US&appid=${key}`;
 
         //fetch city name entered into field and get lat and long from geocoder in order to pass into the one call url
         fetch(geo)
@@ -25,12 +22,16 @@ const app = {
             return response.json();
         })
         .then(geoData => {
-            app.showWeather(geoData);
+            app.showLocation(geoData);
         })
         .catch(console.error)
     },
-    showWeather: (response) => {
-        console.log(response);
+    showLocation: (response) => {
+        console.log(response)
+        // works!!
+        console.log(response[0].lat);
+        let lat = response[0].lat;
+        let lon = response[0].lon;
     }
 }
 
