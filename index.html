@@ -7,23 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
 
-<body>
+<body class="body-background">
     <!-- header section -->
 
-    <header class="container">
+    <header class="container header-background min-vw-100">
         <div class="row text-center py-3">
-            <p class="col">Weather Dashboard</p>
+            <h1 class="col-12 blue-gray-text">Weather Dashboard</h1>
         </div>
     </header>
 
     <!-- search bar section -->
-    <aside class="col-3 mb-3 text-left mx-3">
-        <label for="city-search" class="form-label">Search for a City:</label>
-        <input type="text" class="form-control" id="city-search" value="" placeholder="San Diego">
+    <aside class="col-3 m-3 text-left">
+        <label for="city-search" class="form-label fs-3 blue-gray-text">Search for a City:</label>
+        <input type="text" class="form-control" id="city-search" value="" placeholder="City">
+        <input type="text" class="form-control" id="state-search" value="" placeholder="State">
+        <input type="text" class="form-control" id="country-search" value="" placeholder="Country">
+        <div id="search-border">
+            <button type="button" id="searchBtn"
+                class="btn btn-one header-background py-2 fs-5 my-3 col-12">Search</button>
+        </div>
+        <button class="cities btn-one btn py-2 fs-5 mt-3 mb-2 col-12">Atlanta</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Denver</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Seattle</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">San Francisco</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Orlando</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">New York</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Chicago</button>
+        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Austin</button>
         <table id="weather-table"></table>
     </aside>
 
@@ -34,6 +51,10 @@
 
         </section>
     </main>
+
+    <!-- expirement section -->
+
+    <!-- END -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
