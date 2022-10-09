@@ -1,12 +1,13 @@
 // declare any global var associated with ID's and elements
 let citySearchID = $("#city-search")
-let tableBody = $("#weather-table");
+let stateSearchID = $("#state-search")
+let countrySearchID = $("country-search")
 let searchBtn = $("#searchBtn");
 
 const app = {
     init: () => {
-        // add event listener if user presses the enter key
-        citySearchID.on('keydown', (event)=> {
+        // add event listener if user presses the enter key when finished with the country
+        countrySearchID.on('keydown', (event)=> {
             if (event.keyCode === 13) {
                 app.fetchLocation();
             }
@@ -16,9 +17,11 @@ const app = {
 
     },
     fetchLocation: (event) => {
-        let cityName = $('input:text').val();
+        let cityName = citySearchID.val();
+        let stateName = stateSearchID.val();
+        let countryName = countrySearchID.val();
         let key = '2c8438a889150a71aa165db59d155f28';
-        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},FL,US&appid=${key}`;
+        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateName},${countryName}&appid=${key}`;
 
         //fetch city name entered into field and get lat and long from geocoder in order to pass into the one call url
         fetch(geo)
