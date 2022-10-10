@@ -1,7 +1,7 @@
 // declare any global var associated with ID's and elements
 let citySearchID = $("#city-search")
 let stateSearchID = $("#state-search")
-let countrySearchID = $("country-search")
+let countrySearchID = $("#country-search")
 let searchBtn = $("#searchBtn");
 
 const app = {
@@ -61,9 +61,9 @@ const app = {
     }
 }
 
-const autoComplete = {
+const autoCompleteForm = {
     init: () => {
-        autoComplete.fetchCities();
+        autoCompleteForm.fetchCities();
     },
 
     fetchCities: (event) => {
@@ -75,27 +75,91 @@ const autoComplete = {
                 return response.json();
             })
             .then(citiesData => {
-                autoComplete.showCities(citiesData);
+                autoCompleteForm.showCities(citiesData);
             })
-            .catch(console.error);
+            .catch(console.error)
     },
 
     showCities: (response) => {
         // use .map to place all city names in an array
         const cityNames = response.data.map(({ city }) => city);
-        // console.log(cityNames);
+        // set data to local storage to use as source for autocompleteForm form
+        localStorage.setItem("cityNames", JSON.stringify(cityNames));
+        const cityNameStorage = localStorage.getItem("cityNames");
+
         $(function () {
             citySearchID.autocomplete({
-                
+
                 minLength: 3,
                 autoFocus: true,
-                source: cityNames
+                source: JSON.parse(cityNameStorage),
             });
         });
-    }
+        autoCompleteForm.fetchCountries();
+    },
 
+    fetchCountries: (event) => {
+
+        fetch('https://countriesnow.space/api/v0.1/countries/iso')
+            .then(response => {
+                if (!response.ok) throw new Error(response.statusText)
+                return response.json();
+            })
+            .then(countriesData => {
+                autoCompleteForm.showCountries(countriesData);
+            })
+            .catch(console.error);
+    },
+
+    showCountries: (response) => {
+        // console.log(response);
+        // use .map to place all city names in an array
+        const countryNames = response.data.map(({ Iso2 }) => Iso2);
+        // console.log(countryNames);
+        localStorage.setItem("countryNames", JSON.stringify(countryNames));
+        const countryNameStorage = localStorage.getItem("countryNames");
+
+        $(function () {
+            countrySearchID.autocomplete({
+                autoFocus: true,
+                source: JSON.parse(countryNameStorage),
+            });
+        });
+
+        autoCompleteForm.fetchStates();
+    },
+
+    fetchStates: (event) => {
+
+        fetch('https://countriesnow.space/api/v0.1/countries/states')
+            .then(response => {
+                if (!response.ok) throw new Error(response.statusText)
+                return response.json();
+            })
+            .then(statesData => {
+                autoCompleteForm.showStates(statesData);
+            })
+            .catch(console.error)
+    },
+
+    showStates: (response) => {
+        // console.log(response.data[232].states);
+        const stateCodes = response.data[232].states.map(({ state_code }) => state_code);
+        localStorage.setItem("stateCodes", JSON.stringify(stateCodes));
+        const stateCodeStorage = localStorage.getItem("stateCodes");
+
+        $(function () {
+            stateSearchID.autocomplete({
+                autoFocus: true,
+                source: JSON.parse(stateCodeStorage),
+            })
+        })
+    }
 }
 
 // initialize the page upon loading
 app.init();
-autoComplete.init();
+autoCompleteForm.init();
+
+// either show error on invalid input or fire this alert on page load:
+// alert("If using the autocompleteForm feature, for U.S. Cities, do NOT include the country code in the city input text field.");
