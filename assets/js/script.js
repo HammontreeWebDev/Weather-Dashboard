@@ -52,6 +52,12 @@ const app = {
         localStorage.setItem("geoState", JSON.stringify(response[0].state));
 
         localStorage.setItem("geoCountry", JSON.stringify(response[0].country));
+
+        let geoCity = localStorage.getItem("geoCity");
+        let geoState = localStorage.getItem("geoState");
+        let geoCountry = localStorage.getItem("geoCountry");
+    
+        sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
         // -----------------------------------//
 
         console.log(response[0].lat);
@@ -174,19 +180,27 @@ const autoCompleteForm = {
 }
 
 function initText() {
-    // This section is retrieving the last searched for location name for the top section
+    // This section is retrieving the last searched for location name for the top section and checking if local storage exists... if it does not exist, it will default to Atlanta, GA...
+
     let geoCity = localStorage.getItem("geoCity");
     let geoState = localStorage.getItem("geoState");
     let geoCountry = localStorage.getItem("geoCountry");
 
+    if (geoCity === null) {
+    sectionCityNameID[0].textContent = "Atlanta, Georgia, US";
+    }
+
+    else {
     sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
+    }
+    
     // -----------------------------------------------//
 };
 
 // initialize the page upon loading
 initText();
-app.init();
 autoCompleteForm.init();
+app.init();
 
 // either show error on invalid input or fire this alert on page load:
 // alert("If using the autocompleteForm feature, for U.S. Cities, do NOT include the country code in the city input text field.");
