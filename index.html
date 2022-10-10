@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+  />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,14 +29,25 @@
 
     <!-- search bar section -->
     <aside class="col-3 m-3 text-left">
-        <label for="city-search" class="form-label fs-3 blue-gray-text">Search for a City:</label>
-        <input type="text" class="form-control" id="city-search" value="" placeholder="City">
-        <input type="text" class="form-control" id="state-search" value="" placeholder="State">
-        <input type="text" class="form-control" id="country-search" value="" placeholder="Country">
+        <h2 class="fs-3 blue-gray-text">Search for a City:</h2>
+
+        <div class="ui-widget">
+            <input type="text" class="form-control mt-3 py-2" id="city-search" value="" placeholder="City">
+        </div>
+
+        <div class="ui-widget">
+            <input type="text" class="form-control mt-3 py-2" id="state-search" value="" placeholder="State">
+        </div>
+
+        <div class="ui-widget">
+            <input type="text" class="form-control mt-3 py-2" id="country-search" value="" placeholder="Country">
+        </div>
+
         <div id="search-border">
             <button type="button" id="searchBtn"
                 class="btn btn-one header-background py-2 fs-5 my-3 col-12">Search</button>
         </div>
+
         <button class="cities btn-one btn py-2 fs-5 mt-3 mb-2 col-12">Atlanta</button>
         <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Denver</button>
         <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Seattle</button>
