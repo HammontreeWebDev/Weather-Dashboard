@@ -28,7 +28,7 @@
     </header>
 
     <!-- content -->
-    <main class="container d-flex mx-0">
+    <main class="container d-flex m-0 min-vw-100">
     <aside class="col-3 m-3 text-left">
         <h2 class="fs-3 blue-gray-text">Search for a City:</h2>
 
@@ -58,16 +58,19 @@
         <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Chicago</button>
         <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Austin</button>
     </aside>
-    <section id="highlight-weather" class="row m-3 p-3">
-        <h2 id="section-city-name" class="col">Atlanta</h2>
-        <h2 id="section-current-day" class="col">(09/24/2022)</h2>
-        <img id="section-weather-icon" class="col-7" src="" alt="">
-        <ul class="row fs-5 ">
-            <li class="col">Temp: </li>
-            <li>Wind: </li>
-            <li>Humidity: </li>
+    <!-- top section weather template -->
+    <section id="highlight-weather" class="row mt-4 mx-3 p-3">
+        <h2 id="section-city-name" class="col-1 ps-1">Atlanta</h2>
+        <h2 id="section-current-day" class="col-2">(09/24/2022)</h2>
+        <img id="section-weather-icon" class="col-1" src="" alt="current weather icon">
+        <ul class="row fs-5 list-style">
+            <li id="section-temp" class="pt-1">Temp: </li>
+            <li id="section-wind" class="pt-1">Wind: </li>
+            <li id="section-humidity" class="pt-1">Humidity: </li>
         </ul>
     </section>
+
+    <!-- bottom section weather card template(s) -->
 </main>
 
     <!-- expirement section -->

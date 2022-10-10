@@ -75,7 +75,19 @@ body {
   }
 
 #highlight-weather {
-    border: 3px dashed var(--alt-two);
+    border: 3px solid var(--alt-two);
     height: min-content;
     width: 100%;
+}
+
+.list-style {
+    list-style: none;
+}
+
+#section-city-name {
+    min-width: fit-content;
+}
+
+#section-current-day {
+    min-width: fit-content;
 }

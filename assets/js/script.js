@@ -1,8 +1,15 @@
 // declare any global var associated with ID's and elements
-let citySearchID = $("#city-search")
-let stateSearchID = $("#state-search")
-let countrySearchID = $("#country-search")
+let citySearchID = $("#city-search");
+let stateSearchID = $("#state-search");
+let countrySearchID = $("#country-search");
 let searchBtn = $("#searchBtn");
+let highlightWeatherID = $('#highlight-weather');
+let sectionCityNameID = $('#section-city-name');
+let sectionCurrentDayID = $('#section-current-day');
+let sectionWeatherIconID = $('#section-weather-icon');
+let sectionTempID = $('#section-temp');
+let sectionWindID = $('#section-wind');
+let sectionHumidityID = $('section-humidity');
 
 const app = {
     init: () => {
@@ -37,7 +44,16 @@ const app = {
     // take lat and long from user entered city name and pass them into a variable that will then be passed into a template literal string for the one call url so that we can get the weather without having to put in a lon and lat ourselves!!! WOOOHOOO.. Makin it easy for the user.
     fetchWeather: (response) => {
         console.log(response)
-        // works!!
+
+        // set local storage for retrieved name of city entered to display to top section, this will ensure that the next time the user visits the page, the last city they looked up will be available to them
+        // -----------------------------------//
+        localStorage.setItem("geoCity", JSON.stringify(response[0].name));
+
+        localStorage.setItem("geoState", JSON.stringify(response[0].state));
+
+        localStorage.setItem("geoCountry", JSON.stringify(response[0].country));
+        // -----------------------------------//
+
         console.log(response[0].lat);
         console.log(response[0].lon);
         let lat = response[0].lat;
@@ -157,7 +173,18 @@ const autoCompleteForm = {
     }
 }
 
+function initText() {
+    // This section is retrieving the last searched for location name for the top section
+    let geoCity = localStorage.getItem("geoCity");
+    let geoState = localStorage.getItem("geoState");
+    let geoCountry = localStorage.getItem("geoCountry");
+
+    sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
+    // -----------------------------------------------//
+};
+
 // initialize the page upon loading
+initText();
 app.init();
 autoCompleteForm.init();
 
