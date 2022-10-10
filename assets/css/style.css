@@ -73,3 +73,9 @@ body {
   .blue-gray-text {
     color: var(--blue-gray);
   }
+
+#highlight-weather {
+    border: 3px dashed var(--alt-two);
+    height: min-content;
+    width: 100%;
+}

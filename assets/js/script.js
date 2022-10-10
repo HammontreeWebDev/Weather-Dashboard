@@ -143,7 +143,7 @@ const autoCompleteForm = {
     },
 
     showStates: (response) => {
-        // console.log(response.data[232].states);
+        // console.log(response.data[232].states); for US States
         const stateCodes = response.data[232].states.map(({ state_code }) => state_code);
         localStorage.setItem("stateCodes", JSON.stringify(stateCodes));
         const stateCodeStorage = localStorage.getItem("stateCodes");
