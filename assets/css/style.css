@@ -78,16 +78,33 @@ body {
     border: 3px solid var(--alt-two);
     height: min-content;
     width: 100%;
+    position: relative;
+    box-shadow: 0 0 3px 3px var(--blue-gray);
 }
 
 .list-style {
     list-style: none;
+    color: var(--alt-two);
+    text-shadow: 1px 1px var(--blue-gray);
 }
 
 #section-city-name {
     min-width: fit-content;
+    font-weight: 900;
+    color: var(--blue-gray);
+    text-decoration: underline;
+    text-shadow: 1px 1px var(--header);
 }
 
 #section-current-day {
     min-width: fit-content;
+    color: var(--main-text);
+    text-shadow: 2px 2px var(--blue-gray);
+}
+
+#section-weather-icon {
+    margin: 0%;
+    height: 40px;
+    width: auto;
+    padding: 0%;
 }

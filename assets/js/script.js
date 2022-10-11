@@ -9,7 +9,27 @@ let sectionCurrentDayID = $('#section-current-day');
 let sectionWeatherIconID = $('#section-weather-icon');
 let sectionTempID = $('#section-temp');
 let sectionWindID = $('#section-wind');
-let sectionHumidityID = $('section-humidity');
+let sectionHumidityID = $('#section-humidity');
+
+// set all weather icons to a variable
+let icon01d = 'assets/img/01d.png';
+let icon01n = 'assets/img/01n.png';
+let icon02d = 'assets/img/02d.png';
+let icon02n = 'assets/img/02n.png';
+let icon03d = 'assets/img/03d.png';
+let icon03n = 'assets/img/03n.png';
+let icon04d = 'assets/img/04d.png';
+let icon04n = 'assets/img/04n.png';
+let icon09d = 'assets/img/09d.png';
+let icon09n = 'assets/img/09n.png';
+let icon10d = 'assets/img/10d.png';
+let icon10n = 'assets/img/10n.png';
+let icon11d = 'assets/img/11d.png';
+let icon11n = 'assets/img/11n.png';
+let icon13d = 'assets/img/13d.png';
+let icon13n = 'assets/img/13n.png';
+let icon50d = 'assets/img/50d.png';
+let icon50n = 'assets/img/50n.png';
 
 const app = {
     init: () => {
@@ -65,7 +85,8 @@ const app = {
         let lat = response[0].lat;
         let lon = response[0].lon;
         let key = '2c8438a889150a71aa165db59d155f28';
-        let oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${key}`;
+        // specify imperial units
+        let oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${key}`;
 
         fetch(oneCallUrl)
             .then(response => {
@@ -79,7 +100,95 @@ const app = {
     },
     // need to show data on page here:
     showWeather: (response) => {
-        console.log(response);
+        console.log(response.daily[0]);
+        // add current date (dt) for top section to local storage for initText() and update page based on response
+        localStorage.setItem("currentDate", response.daily[0].dt)
+
+        let timeStamp = response.daily[0].dt;
+
+        let date = new Date(timeStamp * 1000);
+
+        sectionCurrentDayID[0].textContent = `${date.toDateString()}`
+        // ---------------------------------------//
+        // add current weather icon for top section to local storage for initText() and update page based on response
+        localStorage.setItem("weatherIcon", response.daily[0].weather[0].icon);
+
+        let weatherIcon = response.daily[0].weather[0].icon;
+
+        // set up if else if statement to evaluate the value of the weather icon and set text to appropriate img src
+        if (weatherIcon == '01d') {
+            sectionWeatherIconID.attr('src', icon01d);
+        }
+        else if (weatherIcon == '01n') {
+            sectionWeatherIconID.attr('src', icon01n);
+        }
+        else if (weatherIcon == '02d') {
+            sectionWeatherIconID.attr('src', icon02d);
+        }
+        else if (weatherIcon == '02n') {
+            sectionWeatherIconID.attr('src', icon02n);
+        }
+        else if (weatherIcon == '03d') {
+            sectionWeatherIconID.attr('src', icon03d);
+        }
+        else if (weatherIcon == '03n') {
+            sectionWeatherIconID.attr('src', icon03n);
+        }
+        else if (weatherIcon == '04d') {
+            sectionWeatherIconID.attr('src', icon04d);
+        }
+        else if (weatherIcon == '04n') {
+            sectionWeatherIconID.attr('src', icon04n);
+        }
+        else if (weatherIcon == '09d') {
+            sectionWeatherIconID.attr('src', icon09d);
+        }
+        else if (weatherIcon == '09n') {
+            sectionWeatherIconID.attr('src', icon09n);
+        }
+        else if (weatherIcon == '10d') {
+            sectionWeatherIconID.attr('src', icon10d);
+        }
+        else if (weatherIcon == '10n') {
+            sectionWeatherIconID.attr('src', icon10n);
+        }
+        else if (weatherIcon == '11d') {
+            sectionWeatherIconID.attr('src', icon11d);
+        }
+        else if (weatherIcon == '11n') {
+            sectionWeatherIconID.attr('src', icon11n);
+        }
+        else if (weatherIcon == '13d') {
+            sectionWeatherIconID.attr('src', icon13d);
+        }
+        else if (weatherIcon == '13n') {
+            sectionWeatherIconID.attr('src', icon13n);
+        }
+        else if (weatherIcon == '50d') {
+            sectionWeatherIconID.attr('src', icon50d);
+        }
+        else if (weatherIcon == '50n') {
+            sectionWeatherIconID.attr('src', icon50n);
+        }
+        // ---------------------------------------// 
+        // For top section (current day) set temp, wind, and humidity to local storage for textinit() and then place on page based on response
+        // console.log(response.daily[0].temp.day);
+        // console.log(response.daily[0].humidity);
+        // console.log(response.daily[0].wind_speed);
+
+        localStorage.setItem("temp", response.daily[0].temp.day);
+        localStorage.setItem("humidity", response.daily[0].humidity);
+        localStorage.setItem("windSpeed", response.daily[0].wind_speed);
+
+        let temp = response.daily[0].temp.day;
+        let humidity = response.daily[0].humidity;
+        let wind_speed = response.daily[0].wind_speed;
+
+        sectionTempID[0].textContent = `Temp: ${temp}\u00B0F`;
+        sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
+        sectionWindID[0].textContent = `Wind: ${wind_speed} mph`
+
+        // ---------------------------------------// 
     }
 }
 
@@ -187,7 +296,7 @@ function initText() {
     let geoCountry = localStorage.getItem("geoCountry");
 
     if (geoCity === null) {
-    sectionCityNameID[0].textContent = "Atlanta, Georgia, US";
+    // add live stats here for atlanta
     }
 
     else {
@@ -195,6 +304,96 @@ function initText() {
     }
     
     // -----------------------------------------------//
+    // This section will check local storage to see if a value exists pertaining to the current day that weather in a particular location was searched for.. if it does not exist, the value will default
+    let timeStamp = localStorage.getItem("currentDate");
+
+    if (timeStamp === null) {
+        // add live stats here for atlanta
+    }
+
+    else {
+    let date = new Date(timeStamp * 1000);
+
+    sectionCurrentDayID[0].textContent = `${date.toDateString()}`
+    }
+    // -------------------------------------------//
+    // get weather icon from local storage if it exists and place it on page
+    let weatherIcon = localStorage.getItem("weatherIcon");
+
+    if (weatherIcon === null) {
+        // add live stats here for atlanta
+    }
+
+    else if (weatherIcon == '01d') {
+        sectionWeatherIconID.attr('src', icon01d);
+    }
+    else if (weatherIcon == '01n') {
+        sectionWeatherIconID.attr('src', icon01n);
+    }
+    else if (weatherIcon == '02d') {
+        sectionWeatherIconID.attr('src', icon02d);
+    }
+    else if (weatherIcon == '02n') {
+        sectionWeatherIconID.attr('src', icon02n);
+    }
+    else if (weatherIcon == '03d') {
+        sectionWeatherIconID.attr('src', icon03d);
+    }
+    else if (weatherIcon == '03n') {
+        sectionWeatherIconID.attr('src', icon03n);
+    }
+    else if (weatherIcon == '04d') {
+        sectionWeatherIconID.attr('src', icon04d);
+    }
+    else if (weatherIcon == '04n') {
+        sectionWeatherIconID.attr('src', icon04n);
+    }
+    else if (weatherIcon == '09d') {
+        sectionWeatherIconID.attr('src', icon09d);
+    }
+    else if (weatherIcon == '09n') {
+        sectionWeatherIconID.attr('src', icon09n);
+    }
+    else if (weatherIcon == '10d') {
+        sectionWeatherIconID.attr('src', icon10d);
+    }
+    else if (weatherIcon == '10n') {
+        sectionWeatherIconID.attr('src', icon10n);
+    }
+    else if (weatherIcon == '11d') {
+        sectionWeatherIconID.attr('src', icon11d);
+    }
+    else if (weatherIcon == '11n') {
+        sectionWeatherIconID.attr('src', icon11n);
+    }
+    else if (weatherIcon == '13d') {
+        sectionWeatherIconID.attr('src', icon13d);
+    }
+    else if (weatherIcon == '13n') {
+        sectionWeatherIconID.attr('src', icon13n);
+    }
+    else if (weatherIcon == '50d') {
+        sectionWeatherIconID.attr('src', icon50d);
+    }
+    else if (weatherIcon == '50n') {
+        sectionWeatherIconID.attr('src', icon50n);
+    }
+    
+    // get temp, humidity, and wind speed from local storage and if it exists, show for current day section
+    let temp = localStorage.getItem("temp");
+    let humidity = localStorage.getItem("humidity");
+    let wind_speed = localStorage.getItem("windSpeed");
+
+    if (sectionTempID[0].textContent === null) {
+        // add live stats here for atlanta
+    }
+    else {
+        sectionTempID[0].textContent = `Temp: ${temp} \u00B0F`;
+        sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
+        sectionWindID[0].textContent = `Wind: ${wind_speed} mph`;
+    }
+
+    // -------------------------------------------//
 };
 
 // initialize the page upon loading

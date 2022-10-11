@@ -1,0 +1,85 @@
+0
+: 
+{dt: 1665421200, sunrise: 1665400955, sunset: 1665442844, moonrise: 1665445320, moonset: 1665403260, …}
+1
+: 
+{dt: 1665507600, sunrise: 1665487389, sunset: 1665529178, moonrise: 1665533700, moonset: 1665493260, …}
+2
+: 
+{dt: 1665594000, sunrise: 1665573824, sunset: 1665615512, moonrise: 1665622320, moonset: 1665583260, …}
+3
+: 
+{dt: 1665680400, sunrise: 1665660259, sunset: 1665701848, moonrise: 1665711120, moonset: 1665673200, …}
+4
+: 
+{dt: 1665766800, sunrise: 1665746695, sunset: 1665788184, moonrise: 1665800160, moonset: 1665763140, …}
+5
+: 
+{dt: 1665853200, sunrise: 1665833130, sunset: 1665874520, moonrise: 1665889500, moonset: 1665852840, …}
+6
+: 
+{dt: 1665939600, sunrise: 1665919567, sunset: 1665960858, moonrise: 1665979080, moonset: 1665942360, …}
+7
+: 
+{dt: 1666026000, sunrise: 1666006004, sunset: 1666047196, moonrise: 0, moonset: 1666031520, …}
+
+
+// -------------------------------------//
+
+clouds
+: 
+26
+dew_point
+: 
+67.78
+dt
+: 
+1665421200
+feels_like
+: 
+{day: 90.07, night: 76.35, eve: 79.92, morn: 72.7}
+humidity
+: 
+53
+moon_phase
+: 
+0.53
+moonrise
+: 
+1665445320
+moonset
+: 
+1665403260
+pop
+: 
+0.4
+pressure
+: 
+1019
+rain
+: 
+0.33
+sunrise
+: 
+1665400955
+sunset
+: 
+1665442844
+temp
+: 
+{day: 86.79, min: 71.69, max: 86.79, night: 75.31, eve: 78.51, …}
+uvi
+: 
+7.9
+weather
+: 
+[{…}]
+wind_deg
+: 
+52
+wind_gust
+: 
+17.81
+wind_speed
+: 
+11.39
