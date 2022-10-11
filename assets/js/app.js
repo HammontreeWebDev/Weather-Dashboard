@@ -32,6 +32,7 @@ let icon13n = 'assets/img/13n.png';
 let icon50d = 'assets/img/50d.png';
 let icon50n = 'assets/img/50n.png';
 
+
 const app = {
     init: () => {
         // add event listener if user presses the enter key when finished with the country
@@ -60,7 +61,9 @@ const app = {
             .then(geoData => {
                 app.fetchWeather(geoData);
             })
-            .catch(console.error)
+            .catch(error => {
+                console.log(error);
+            });
     },
     // take lat and long from user entered city name and pass them into a variable that will then be passed into a template literal string for the one call url so that we can get the weather without having to put in a lon and lat ourselves!!! WOOOHOOO.. Makin it easy for the user.
     fetchWeather: (response) => {
@@ -97,7 +100,9 @@ const app = {
             .then(weatherData => {
                 app.showWeather(weatherData);
             })
-            .catch(console.error)
+            .catch(error => {
+                console.log(error);
+            })
     },
     // need to show data on page here:
     showWeather: (response) => {
