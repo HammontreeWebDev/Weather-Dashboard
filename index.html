@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-  />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,49 +26,56 @@
 
     <!-- content -->
     <main class="container d-flex m-0 min-vw-100">
-    <aside class="col-3 m-3 text-left">
-        <h2 class="fs-3 blue-gray-text">Search for a City:</h2>
+        <aside class="col-3 m-3 text-left">
+            <h2 class="fs-3 blue-gray-text">Search for a City:</h2>
 
-        <div class="ui-widget">
-            <input type="text" class="form-control mt-3 py-2" id="city-search" value="" placeholder="City">
-        </div>
+            <div class="ui-widget">
+                <input type="text" class="form-control mt-3 py-2" id="city-search" value="" placeholder="City">
+            </div>
 
-        <div class="ui-widget">
-            <input type="text" class="form-control mt-3 py-2" id="state-search" value="" placeholder="State">
-        </div>
+            <div class="ui-widget">
+                <input type="text" class="form-control mt-3 py-2" id="state-search" value="" placeholder="State">
+            </div>
 
-        <div class="ui-widget">
-            <input type="text" class="form-control mt-3 py-2" id="country-search" value="" placeholder="Country">
-        </div>
+            <div class="ui-widget">
+                <input type="text" class="form-control mt-3 py-2" id="country-search" value="" placeholder="Country">
+            </div>
 
-        <div id="search-border">
-            <button type="button" id="searchBtn"
-                class="btn btn-one header-background py-2 fs-5 my-3 col-12">Search</button>
-        </div>
+            <div id="search-border">
+                <button type="button" id="searchBtn"
+                    class="btn btn-one header-background py-2 fs-5 my-3 col-12">Search</button>
+            </div>
 
-        <button class="cities btn-one btn py-2 fs-5 mt-3 mb-2 col-12">Atlanta</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Denver</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Seattle</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">San Francisco</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Orlando</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">New York</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Chicago</button>
-        <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Austin</button>
-    </aside>
-    <!-- top section weather template -->
-    <section id="highlight-weather" class="row mt-4 mx-3 p-3">
-        <h2 id="section-city-name" class="col-1 ps-1"></h2>
-        <h2 id="section-current-day" class="col-2"></h2>
-        <img id="section-weather-icon" class="col-1" src="" alt="current weather icon">
-        <ul class="row fs-5 list-style">
-            <li id="section-temp" class="pt-1"></li>
-            <li id="section-wind" class="pt-1"></li>
-            <li id="section-humidity" class="pt-1"></li>
-        </ul>
-    </section>
+            <button class="cities btn-one btn py-2 fs-5 mt-3 mb-2 col-12">Atlanta</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Denver</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Seattle</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">San Francisco</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Orlando</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">New York</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Chicago</button>
+            <button class="cities btn-one btn py-2 fs-5 my-2 col-12">Austin</button>
+        </aside>
+        <!-- top section weather template -->
+        <section class="container">
+            <section id="highlight-weather" class="row mt-4 mx-3 p-3">
+                <h2 id="section-city-name" class="col-1 ps-1"></h2>
+                <h2 id="section-current-day" class="col-2"></h2>
+                <img id="section-weather-icon" class="col-1" src="" alt="current weather icon">
+                <ul class="row fs-5 list-style">
+                    <li id="section-temp" class="pt-1"></li>
+                    <li id="section-wind" class="pt-1"></li>
+                    <li id="section-humidity" class="pt-1"></li>
+                </ul>
+            </section>
+            <!-- bottom section weather card template(s) -->
+            <section class="row mt-4 mx-3 p-3">
+                <h3 id="forecast-title">5 Day Forecast:</h3>
+                <div id="five-day-forecast">
+                </div>
+            </section>
 
-    <!-- bottom section weather card template(s) -->
-</main>
+        </section>
+    </main>
 
     <!-- expirement section -->
     <h1 id="testing"></h1>

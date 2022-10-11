@@ -10,6 +10,7 @@ let sectionWeatherIconID = $('#section-weather-icon');
 let sectionTempID = $('#section-temp');
 let sectionWindID = $('#section-wind');
 let sectionHumidityID = $('#section-humidity');
+let fiveDayForecast = $('#five-day-forecast');
 
 // set all weather icons to a variable
 let icon01d = 'assets/img/01d.png';
@@ -76,7 +77,7 @@ const app = {
         let geoCity = localStorage.getItem("geoCity");
         let geoState = localStorage.getItem("geoState");
         let geoCountry = localStorage.getItem("geoCountry");
-    
+
         sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
         // -----------------------------------//
 
@@ -100,20 +101,20 @@ const app = {
     },
     // need to show data on page here:
     showWeather: (response) => {
-        console.log(response.daily[0]);
+        console.log(response.current);
         // add current date (dt) for top section to local storage for initText() and update page based on response
-        localStorage.setItem("currentDate", response.daily[0].dt)
+        localStorage.setItem("currentDate", response.current.dt)
 
-        let timeStamp = response.daily[0].dt;
+        let timeStamp = response.current.dt;
 
         let date = new Date(timeStamp * 1000);
 
         sectionCurrentDayID[0].textContent = `${date.toDateString()}`
         // ---------------------------------------//
         // add current weather icon for top section to local storage for initText() and update page based on response
-        localStorage.setItem("weatherIcon", response.daily[0].weather[0].icon);
+        localStorage.setItem("weatherIcon", response.current.weather[0].icon);
 
-        let weatherIcon = response.daily[0].weather[0].icon;
+        let weatherIcon = response.current.weather[0].icon;
 
         // set up if else if statement to evaluate the value of the weather icon and set text to appropriate img src
         if (weatherIcon == '01d') {
@@ -172,22 +173,110 @@ const app = {
         }
         // ---------------------------------------// 
         // For top section (current day) set temp, wind, and humidity to local storage for textinit() and then place on page based on response
-        // console.log(response.daily[0].temp.day);
-        // console.log(response.daily[0].humidity);
-        // console.log(response.daily[0].wind_speed);
+        // console.log(response.current.temp.day);
+        // console.log(response.current.humidity);
+        // console.log(response.current.wind_speed);
 
-        localStorage.setItem("temp", response.daily[0].temp.day);
-        localStorage.setItem("humidity", response.daily[0].humidity);
-        localStorage.setItem("windSpeed", response.daily[0].wind_speed);
+        localStorage.setItem("temp", response.current.temp);
+        localStorage.setItem("humidity", response.current.humidity);
+        localStorage.setItem("windSpeed", response.current.wind_speed);
 
-        let temp = response.daily[0].temp.day;
-        let humidity = response.daily[0].humidity;
-        let wind_speed = response.daily[0].wind_speed;
+        let temp = response.current.temp;
+        let humidity = response.current.humidity;
+        let wind_speed = response.current.wind_speed;
 
-        sectionTempID[0].textContent = `Temp: ${temp}\u00B0F`;
+        sectionTempID[0].textContent = `Temp: ${temp} \u00B0F`;
         sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
         sectionWindID[0].textContent = `Wind: ${wind_speed} mph`
 
+        // ---------------------------------------// 
+        // Five Day Forecast:
+        console.log(response.daily[1]);
+
+        // set local storage for text.init();
+        let firstDay = response.daily[1];
+        let secondDay = response.daily[2];
+        let thirdDay = response.daily[3];
+        let fourthDay = response.daily[4];
+        let fifthDay = response.daily[5];
+        let forecastStorage = [firstDay, secondDay, thirdDay, fourthDay, fifthDay];
+        localStorage.setItem("dailyForecast", JSON.stringify(forecastStorage));
+
+        // write five day forecast out to HTML
+        fiveDayForecast[0].innerHTML = response.daily.map((day, idx) => {
+
+            let weatherIcon = day.weather[0].icon;
+
+            if (idx > 0 && idx <= 5) {
+                if (weatherIcon == '01d') {
+                    weatherIcon = icon01d;
+                }
+                else if (weatherIcon == '01n') {
+                    weatherIcon = icon01n;
+                }
+                else if (weatherIcon == '02d') {
+                    weatherIcon = icon02d;
+                }
+                else if (weatherIcon == '02n') {
+                    weatherIcon = icon02n
+                }
+                else if (weatherIcon == '03d') {
+                    weatherIcon = icon03d
+                }
+                else if (weatherIcon == '03n') {
+                    weatherIcon = icon03n
+                }
+                else if (weatherIcon == '04d') {
+                    weatherIcon = icon04d
+                }
+                else if (weatherIcon == '04n') {
+                    weatherIcon = icon04n
+                }
+                else if (weatherIcon == '09d') {
+                    weatherIcon = icon09d
+                }
+                else if (weatherIcon == '09n') {
+                    weatherIcon = icon09n
+                }
+                else if (weatherIcon == '10d') {
+                    weatherIcon = icon10d
+                }
+                else if (weatherIcon == '10n') {
+                    weatherIcon = icon10n
+                }
+                else if (weatherIcon == '11d') {
+                    weatherIcon = icon11d
+                }
+                else if (weatherIcon == '11n') {
+                    weatherIcon = icon11n
+                }
+                else if (weatherIcon == '13d') {
+                    weatherIcon = icon13d
+                }
+                else if (weatherIcon == '13n') {
+                    weatherIcon = icon13n
+                }
+                else if (weatherIcon == '50d') {
+                    weatherIcon = icon50d
+                }
+                else if (weatherIcon == '50n') {
+                    weatherIcon = icon50n
+                }
+
+                let date = new Date(day.dt * 1000);
+                return `<div id="forecast-body" class="card col mx-2">
+                <div class="card-body p-2">
+                    <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
+                    <img id="forecast-icon" src=${weatherIcon} alt="weather icon">
+                    <ul class="p-0">
+                        <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} </li>
+                        <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} </li>
+                        <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity} </li>
+                    </ul>
+                </div>
+            </div>`
+            }
+        }).join('');
         // ---------------------------------------// 
     }
 }
@@ -296,13 +385,13 @@ function initText() {
     let geoCountry = localStorage.getItem("geoCountry");
 
     if (geoCity === null) {
-    // add live stats here for atlanta
+        // add live stats here for atlanta
     }
 
     else {
-    sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
+        sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
     }
-    
+
     // -----------------------------------------------//
     // This section will check local storage to see if a value exists pertaining to the current day that weather in a particular location was searched for.. if it does not exist, the value will default
     let timeStamp = localStorage.getItem("currentDate");
@@ -312,9 +401,9 @@ function initText() {
     }
 
     else {
-    let date = new Date(timeStamp * 1000);
+        let date = new Date(timeStamp * 1000);
 
-    sectionCurrentDayID[0].textContent = `${date.toDateString()}`
+        sectionCurrentDayID[0].textContent = `${date.toDateString()}`
     }
     // -------------------------------------------//
     // get weather icon from local storage if it exists and place it on page
@@ -377,8 +466,8 @@ function initText() {
     }
     else if (weatherIcon == '50n') {
         sectionWeatherIconID.attr('src', icon50n);
-    }
-    
+    };
+
     // get temp, humidity, and wind speed from local storage and if it exists, show for current day section
     let temp = localStorage.getItem("temp");
     let humidity = localStorage.getItem("humidity");
@@ -391,9 +480,95 @@ function initText() {
         sectionTempID[0].textContent = `Temp: ${temp} \u00B0F`;
         sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
         sectionWindID[0].textContent = `Wind: ${wind_speed} mph`;
-    }
-
+    };
     // -------------------------------------------//
+    
+    // show five day forecast for last searched item using local storage if it exists...
+    if (fiveDayForecast[0].innerHTML === null) {
+        // show data for atlanta
+    }
+    else {
+        const forecastString = localStorage.getItem("dailyForecast");
+        const forecastData = JSON.parse(forecastString);
+        console.log(forecastData);
+
+        fiveDayForecast[0].innerHTML = forecastData.map((day, idx) => {
+            if (idx <= 4){
+
+                let weatherIcon = day.weather[0].icon;
+
+                if (weatherIcon == '01d') {
+                    weatherIcon = icon01d;
+                }
+                else if (weatherIcon == '01n') {
+                    weatherIcon = icon01n;
+                }
+                else if (weatherIcon == '02d') {
+                    weatherIcon = icon02d;
+                }
+                else if (weatherIcon == '02n') {
+                    weatherIcon = icon02n
+                }
+                else if (weatherIcon == '03d') {
+                    weatherIcon = icon03d
+                }
+                else if (weatherIcon == '03n') {
+                    weatherIcon = icon03n
+                }
+                else if (weatherIcon == '04d') {
+                    weatherIcon = icon04d
+                }
+                else if (weatherIcon == '04n') {
+                    weatherIcon = icon04n
+                }
+                else if (weatherIcon == '09d') {
+                    weatherIcon = icon09d
+                }
+                else if (weatherIcon == '09n') {
+                    weatherIcon = icon09n
+                }
+                else if (weatherIcon == '10d') {
+                    weatherIcon = icon10d
+                }
+                else if (weatherIcon == '10n') {
+                    weatherIcon = icon10n
+                }
+                else if (weatherIcon == '11d') {
+                    weatherIcon = icon11d
+                }
+                else if (weatherIcon == '11n') {
+                    weatherIcon = icon11n
+                }
+                else if (weatherIcon == '13d') {
+                    weatherIcon = icon13d
+                }
+                else if (weatherIcon == '13n') {
+                    weatherIcon = icon13n
+                }
+                else if (weatherIcon == '50d') {
+                    weatherIcon = icon50d
+                }
+                else if (weatherIcon == '50n') {
+                    weatherIcon = icon50n
+                }
+                
+                let date = new Date(day.dt * 1000);
+
+        return `<div id="forecast-body" class="card col mx-2">
+                <div class="card-body p-2">
+                    <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
+                    <img id="forecast-icon" src=${weatherIcon} alt="weather icon">
+                    <ul class="p-0">
+                        <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} </li>
+                        <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} </li>
+                        <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity} </li>
+                    </ul>
+                </div>
+            </div>`
+            }
+        });
+    }
+    
 };
 
 // initialize the page upon loading
@@ -403,3 +578,6 @@ app.init();
 
 // either show error on invalid input or fire this alert on page load:
 // alert("If using the autocompleteForm feature, for U.S. Cities, do NOT include the country code in the city input text field.");
+
+
+// on line 198 trying to save to local storage... site is fully functional... however for top section... change out the forecast that is current for response.current 
