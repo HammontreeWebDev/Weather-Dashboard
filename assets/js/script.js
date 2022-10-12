@@ -195,7 +195,3 @@ function initText() {
 
 initText();
 
-// either show error on invalid input or fire this alert on page load:
-// alert("If using the autocompleteForm feature, for U.S. Cities, do NOT include the country code in the city input text field.");
-
-// site is fully functional for the most part... note: commas are appearing after local storage is set and page is reloaded where the data is being pulled from local storage vs. live response... live response data looks good.. need to fix comma issue... also need to work on the left side to save city name that was searched for so that user can click the button and the data will be shown again... not sure how but its obviously possible...

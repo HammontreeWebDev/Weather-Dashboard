@@ -14,7 +14,9 @@ const autoCompleteForm = {
             .then(citiesData => {
                 autoCompleteForm.showCities(citiesData);
             })
-            .catch(console.error)
+            .catch(error => {
+                alert(`Whoops! Something went wrong! \n${error}`);
+            })
     },
 
     showCities: (response) => {
@@ -45,7 +47,9 @@ const autoCompleteForm = {
             .then(countriesData => {
                 autoCompleteForm.showCountries(countriesData);
             })
-            .catch(console.error);
+            .catch(error => {
+                alert(`Whoops! Something went wrong! \n${error}`);
+            });
     },
 
     showCountries: (response) => {
@@ -76,7 +80,9 @@ const autoCompleteForm = {
             .then(statesData => {
                 autoCompleteForm.showStates(statesData);
             })
-            .catch(console.error)
+            .catch(error => {
+                alert(`Whoops! Something went wrong! \n${error}`);
+            })
     },
 
     showStates: (response) => {

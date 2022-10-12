@@ -19,7 +19,7 @@ const atlantaPage = {
             app.fetchWeather(geoData);
         })
         .catch(error => {
-            sectionCityNameID[0].textContent = error;
+            alert(`Whoops! Something went wrong! \n${error}`);
         })
     }
 }

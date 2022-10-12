@@ -11,6 +11,7 @@ let sectionTempID = $('#section-temp');
 let sectionWindID = $('#section-wind');
 let sectionHumidityID = $('#section-humidity');
 let fiveDayForecast = $('#five-day-forecast');
+let errorSectionID = $('#error-section');
 
 // set all weather icons to a variable
 let icon01d = 'assets/img/01d.png';
@@ -62,7 +63,7 @@ const app = {
                 app.fetchWeather(geoData);
             })
             .catch(error => {
-                console.log(error);
+                alert(`Whoops! Something went wrong! \n${error} \nPlease make sure you include only city names in the city field, state codes (i.e. GA and NOT Georgia) in the state field, and country codes in the country field in order to ensure the best possible experience`);
             });
     },
     // take lat and long from user entered city name and pass them into a variable that will then be passed into a template literal string for the one call url so that we can get the weather without having to put in a lon and lat ourselves!!! WOOOHOOO.. Makin it easy for the user.
@@ -101,7 +102,7 @@ const app = {
                 app.showWeather(weatherData);
             })
             .catch(error => {
-                console.log(error);
+                alert(`Whoops! Something went wrong! \n${error}`);
             })
     },
     // need to show data on page here:
