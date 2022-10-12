@@ -11,7 +11,7 @@ let sectionTempID = $('#section-temp');
 let sectionWindID = $('#section-wind');
 let sectionHumidityID = $('#section-humidity');
 let fiveDayForecast = $('#five-day-forecast');
-let errorSectionID = $('#error-section');
+
 
 // set all weather icons to a variable
 let icon01d = 'assets/img/01d.png';
@@ -283,6 +283,9 @@ const app = {
             </div>`
             }
         }).join('');
+
+        // reload to set local storage and allow the search history buttons to be created
+        location.reload();
         // ---------------------------------------// 
     }
 }
