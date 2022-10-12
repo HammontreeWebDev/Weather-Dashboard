@@ -120,10 +120,10 @@ function initText() {
                 let weatherIcon = day.weather[0].icon;
 
                 if (weatherIcon == '01d') {
-                    weatherIcon = icon01d;
+                    weatherIcon = icon01d
                 }
                 else if (weatherIcon == '01n') {
-                    weatherIcon = icon01n;
+                    weatherIcon = icon01n
                 }
                 else if (weatherIcon == '02d') {
                     weatherIcon = icon02d;
@@ -188,7 +188,7 @@ function initText() {
                 </div>
             </div>`
             }
-        });
+        }).join('');
     }
     
 };
