@@ -112,7 +112,7 @@ function initText() {
     else {
         const forecastString = localStorage.getItem("dailyForecast");
         const forecastData = JSON.parse(forecastString);
-        console.log(forecastData);
+        // console.log(forecastData);
 
         fiveDayForecast[0].innerHTML = forecastData.map((day, idx) => {
             if (idx <= 4){

@@ -1,4 +1,3 @@
-// declare any global var associated with ID's and elements
 let citySearchID = $("#city-search");
 let stateSearchID = $("#state-search");
 let countrySearchID = $("#country-search");
@@ -11,9 +10,8 @@ let sectionTempID = $('#section-temp');
 let sectionWindID = $('#section-wind');
 let sectionHumidityID = $('#section-humidity');
 let fiveDayForecast = $('#five-day-forecast');
+let citiesEl = $('.cities');
 
-
-// set all weather icons to a variable
 let icon01d = 'assets/img/01d.png';
 let icon01n = 'assets/img/01n.png';
 let icon02d = 'assets/img/02d.png';
@@ -33,16 +31,26 @@ let icon13n = 'assets/img/13n.png';
 let icon50d = 'assets/img/50d.png';
 let icon50n = 'assets/img/50n.png';
 
+let searchHistory = {
+    cityName: [],
+    countryName: [],
+    stateName: [],
+    currentDate: [],
+    currentTemp: [],
+    currentWind: [],
+    currentHumidity: [],
+    currentWeatherIcon:[],
+    forecast: [],
+};
 
 const app = {
     init: () => {
-        // add event listener if user presses the enter key when finished with the country
         countrySearchID.on('keydown', (event) => {
             if (event.keyCode === 13) {
                 app.fetchLocation();
             }
         });
-        // add event listener if user presses the search button
+    
         searchBtn.on('click', app.fetchLocation);
 
     },
@@ -60,18 +68,21 @@ const app = {
                 return response.json();
             })
             .then(geoData => {
+                // makes sure that live responses are being recorded into the search history array.
+                searchHistory.cityName.unshift(geoData[0].name);
+                searchHistory.stateName.unshift(geoData[0].state);
+                searchHistory.countryName.unshift(geoData[0].country);
                 app.fetchWeather(geoData);
             })
             .catch(error => {
                 alert(`Whoops! Something went wrong! \n${error} \nPlease make sure you include only city names in the city field, state codes (i.e. GA and NOT Georgia) in the state field, and country codes in the country field in order to ensure the best possible experience`);
             });
     },
-    // take lat and long from user entered city name and pass them into a variable that will then be passed into a template literal string for the one call url so that we can get the weather without having to put in a lon and lat ourselves!!! WOOOHOOO.. Makin it easy for the user.
-    fetchWeather: (response) => {
-        console.log(response)
 
-        // set local storage for retrieved name of city entered to display to top section, this will ensure that the next time the user visits the page, the last city they looked up will be available to them
-        // -----------------------------------//
+    fetchWeather: (response) => {
+
+        // set local storage so that the last searched for location will display on the page by default when the page is refreshed or closed and re-opened.
+
         localStorage.setItem("geoCity", JSON.stringify(response[0].name));
 
         localStorage.setItem("geoState", JSON.stringify(response[0].state));
@@ -83,14 +94,11 @@ const app = {
         let geoCountry = localStorage.getItem("geoCountry");
 
         sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
-        // -----------------------------------//
 
-        console.log(response[0].lat);
-        console.log(response[0].lon);
         let lat = response[0].lat;
         let lon = response[0].lon;
         let key = '2c8438a889150a71aa165db59d155f28';
-        // specify imperial units
+
         let oneCallUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${key}`;
 
         fetch(oneCallUrl)
@@ -99,16 +107,18 @@ const app = {
                 return response.json();
             })
             .then(weatherData => {
+                // instead of recording the live responses here, we are going to do them in the showWeather property.
                 app.showWeather(weatherData);
             })
             .catch(error => {
                 alert(`Whoops! Something went wrong! \n${error}`);
             })
     },
-    // need to show data on page here:
+
     showWeather: (response) => {
-        console.log(response.current);
-        // add current date (dt) for top section to local storage for initText() and update page based on response
+
+        // Current Day:
+
         localStorage.setItem("currentDate", response.current.dt)
 
         let timeStamp = response.current.dt;
@@ -116,73 +126,8 @@ const app = {
         let date = new Date(timeStamp * 1000);
 
         sectionCurrentDayID[0].textContent = `${date.toDateString()}`
-        // ---------------------------------------//
-        // add current weather icon for top section to local storage for initText() and update page based on response
+
         localStorage.setItem("weatherIcon", response.current.weather[0].icon);
-
-        let weatherIcon = response.current.weather[0].icon;
-
-        // set up if else if statement to evaluate the value of the weather icon and set text to appropriate img src
-        if (weatherIcon == '01d') {
-            sectionWeatherIconID.attr('src', icon01d);
-        }
-        else if (weatherIcon == '01n') {
-            sectionWeatherIconID.attr('src', icon01n);
-        }
-        else if (weatherIcon == '02d') {
-            sectionWeatherIconID.attr('src', icon02d);
-        }
-        else if (weatherIcon == '02n') {
-            sectionWeatherIconID.attr('src', icon02n);
-        }
-        else if (weatherIcon == '03d') {
-            sectionWeatherIconID.attr('src', icon03d);
-        }
-        else if (weatherIcon == '03n') {
-            sectionWeatherIconID.attr('src', icon03n);
-        }
-        else if (weatherIcon == '04d') {
-            sectionWeatherIconID.attr('src', icon04d);
-        }
-        else if (weatherIcon == '04n') {
-            sectionWeatherIconID.attr('src', icon04n);
-        }
-        else if (weatherIcon == '09d') {
-            sectionWeatherIconID.attr('src', icon09d);
-        }
-        else if (weatherIcon == '09n') {
-            sectionWeatherIconID.attr('src', icon09n);
-        }
-        else if (weatherIcon == '10d') {
-            sectionWeatherIconID.attr('src', icon10d);
-        }
-        else if (weatherIcon == '10n') {
-            sectionWeatherIconID.attr('src', icon10n);
-        }
-        else if (weatherIcon == '11d') {
-            sectionWeatherIconID.attr('src', icon11d);
-        }
-        else if (weatherIcon == '11n') {
-            sectionWeatherIconID.attr('src', icon11n);
-        }
-        else if (weatherIcon == '13d') {
-            sectionWeatherIconID.attr('src', icon13d);
-        }
-        else if (weatherIcon == '13n') {
-            sectionWeatherIconID.attr('src', icon13n);
-        }
-        else if (weatherIcon == '50d') {
-            sectionWeatherIconID.attr('src', icon50d);
-        }
-        else if (weatherIcon == '50n') {
-            sectionWeatherIconID.attr('src', icon50n);
-        }
-        // ---------------------------------------// 
-        // For top section (current day) set temp, wind, and humidity to local storage for textinit() and then place on page based on response
-        // console.log(response.current.temp.day);
-        // console.log(response.current.humidity);
-        // console.log(response.current.wind_speed);
-
         localStorage.setItem("temp", response.current.temp);
         localStorage.setItem("humidity", response.current.humidity);
         localStorage.setItem("windSpeed", response.current.wind_speed);
@@ -195,11 +140,16 @@ const app = {
         sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
         sectionWindID[0].textContent = `Wind: ${wind_speed} mph`
 
-        // ---------------------------------------// 
-        // Five Day Forecast:
-        console.log(response.daily[1]);
+        // set to search History array
+        searchHistory.currentWeatherIcon.unshift(response.current.weather[0].icon);
+        searchHistory.currentTemp.unshift(temp);
+        searchHistory.currentWind.unshift(wind_speed);
+        searchHistory.currentHumidity.unshift(humidity);
+        searchHistory.currentDate.unshift(date);
+        // console.log(searchHistory);
 
-        // set local storage for text.init();
+
+        // Five Day Forecast:
         let firstDay = response.daily[1];
         let secondDay = response.daily[2];
         let thirdDay = response.daily[3];
@@ -208,7 +158,10 @@ const app = {
         let forecastStorage = [firstDay, secondDay, thirdDay, fourthDay, fifthDay];
         localStorage.setItem("dailyForecast", JSON.stringify(forecastStorage));
 
-        // write five day forecast out to HTML
+        // place in search history:
+        searchHistory.forecast.unshift(forecastStorage);
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
         fiveDayForecast[0].innerHTML = response.daily.map((day, idx) => {
 
             let weatherIcon = day.weather[0].icon;
@@ -284,9 +237,10 @@ const app = {
             }
         }).join('');
 
-        // reload to set local storage and allow the search history buttons to be created
-        location.reload();
-        // ---------------------------------------// 
+        // handle search history:
+        for ( var i = 0; i < citiesEl.length; i++) {
+            
+        }
     }
 }
 
