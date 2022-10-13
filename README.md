@@ -35,5 +35,4 @@ THEN I am again presented with current and future conditions for that city
 ## Deployed Application
 Link to deployed application:
 https://hammontreewebdev.github.io/Weather-Dashboard/
-
-<img width="1728" alt="Screen Shot 2022-10-13 at 9 56 19 AM" src="https://user-images.githubusercontent.com/113649683/195617257-14bf6436-1b41-4510-9249-7c658ce32168.png">
+<img width="1728" alt="Screen Shot 2022-10-13 at 9 58 50 AM" src="https://user-images.githubusercontent.com/113649683/195618063-933d3b72-f342-419c-ae2e-33610bdc9011.png">
