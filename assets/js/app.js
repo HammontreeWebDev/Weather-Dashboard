@@ -76,7 +76,7 @@ const app = {
         countrySearchID[0].value = '';
 
         let key = '2c8438a889150a71aa165db59d155f28';
-        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateName},${countryName}&appid=${key}`;
+        let geo = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateName},${countryName}&appid=${key}`;
 
         //fetch city name entered into field and get lat and long from geocoder in order to pass into the one call url
         fetch(geo)
