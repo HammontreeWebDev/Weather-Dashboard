@@ -7,7 +7,7 @@ const atlantaPage = {
 
     fetchLocation: (event) => {
         let key = '2c8438a889150a71aa165db59d155f28';
-        let geo = `http://api.openweathermap.org/geo/1.0/direct?q=atlanta,GA,US&appid=${key}`;
+        let geo = `https://api.openweathermap.org/geo/1.0/direct?q=atlanta,GA,US&appid=${key}`;
 
         fetch(geo)
         .then(response => {
