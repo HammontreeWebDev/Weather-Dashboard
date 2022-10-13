@@ -238,9 +238,35 @@ const app = {
         }).join('');
 
         // handle search history:
-        for ( var i = 0; i < citiesEl.length; i++) {
-            
+        for ( var i = 0; i < citiesEl.length; i++ ) {
+            if (searchHistory.cityName[i]) {
+                // show buttons each time a city is searched for
+                citiesEl[i].style.display = 'flex';
+                citiesEl[i].textContent = `${searchHistory.cityName[i]}, ${searchHistory.stateName[i]}, ${searchHistory.countryName[i]}`;
+                // on click of created button, show weather for that location
+                citiesEl.on('click', (event => {
+                    if (event.target === citiesEl[0]) {
+                        sectionCityNameID[0].textContent = `${searchHistory.cityName[0]}, ${searchHistory.stateName[0]}, ${searchHistory.countryName[0]}`;
+                    }
+                    else if (event.target === citiesEl[1]) {
+                        sectionCityNameID[0].textContent = `${searchHistory.cityName[1]}, ${searchHistory.stateName[1]}, ${searchHistory.countryName[1]}`;
+                    }
+                    else if (event.target === citiesEl[2]) {
+                        sectionCityNameID[0].textContent = `${searchHistory.cityName[2]}, ${searchHistory.stateName[2]}, ${searchHistory.countryName[2]}`;
+                    }
+                    else if (event.target === citiesEl[3]) {
+                        sectionCityNameID[0].textContent = `${searchHistory.cityName[3]}, ${searchHistory.stateName[3]}, ${searchHistory.countryName[3]}`;
+                    }
+                    else if (event.target === citiesEl[4]) {
+                        sectionCityNameID[0].textContent = `${searchHistory.cityName[4]}, ${searchHistory.stateName[4]}, ${searchHistory.countryName[4]}`;
+                    }
+                }))
+
+            }
         }
+
+
+        console.log(searchHistory);
     }
 }
 
