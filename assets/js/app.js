@@ -39,7 +39,7 @@ let searchHistory = {
     currentTemp: [],
     currentWind: [],
     currentHumidity: [],
-    currentWeatherIcon:[],
+    currentWeatherIcon: [],
     forecast: [],
 };
 
@@ -50,7 +50,7 @@ const app = {
                 app.fetchLocation();
             }
         });
-    
+
         searchBtn.on('click', app.fetchLocation);
 
     },
@@ -127,6 +127,63 @@ const app = {
 
         sectionCurrentDayID[0].textContent = `${date.toDateString()}`
 
+        let weatherIcon = response.current.weather[0].icon;
+
+        if (weatherIcon == '01d') {
+            sectionWeatherIconID.attr('src', icon01d);
+        }
+        else if (weatherIcon == '01n') {
+            sectionWeatherIconID.attr('src', icon01n);
+        }
+        else if (weatherIcon == '02d') {
+            sectionWeatherIconID.attr('src', icon02d);
+        }
+        else if (weatherIcon == '02n') {
+            sectionWeatherIconID.attr('src', icon02n);
+        }
+        else if (weatherIcon == '03d') {
+            sectionWeatherIconID.attr('src', icon03d);
+        }
+        else if (weatherIcon == '03n') {
+            sectionWeatherIconID.attr('src', icon03n);
+        }
+        else if (weatherIcon == '04d') {
+            sectionWeatherIconID.attr('src', icon04d);
+        }
+        else if (weatherIcon == '04n') {
+            sectionWeatherIconID.attr('src', icon04n);
+        }
+        else if (weatherIcon == '09d') {
+            sectionWeatherIconID.attr('src', icon09d);
+        }
+        else if (weatherIcon == '09n') {
+            sectionWeatherIconID.attr('src', icon09n);
+        }
+        else if (weatherIcon == '10d') {
+            sectionWeatherIconID.attr('src', icon10d);
+        }
+        else if (weatherIcon == '10n') {
+            sectionWeatherIconID.attr('src', icon10n);
+        }
+        else if (weatherIcon == '11d') {
+            sectionWeatherIconID.attr('src', icon11d);
+        }
+        else if (weatherIcon == '11n') {
+            sectionWeatherIconID.attr('src', icon11n);
+        }
+        else if (weatherIcon == '13d') {
+            sectionWeatherIconID.attr('src', icon13d);
+        }
+        else if (weatherIcon == '13n') {
+            sectionWeatherIconID.attr('src', icon13n);
+        }
+        else if (weatherIcon == '50d') {
+            sectionWeatherIconID.attr('src', icon50d);
+        }
+        else if (weatherIcon == '50n') {
+            sectionWeatherIconID.attr('src', icon50n);
+        }
+
         localStorage.setItem("weatherIcon", response.current.weather[0].icon);
         localStorage.setItem("temp", response.current.temp);
         localStorage.setItem("humidity", response.current.humidity);
@@ -138,7 +195,7 @@ const app = {
 
         sectionTempID[0].textContent = `Temp: ${temp} \u00B0F`;
         sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
-        sectionWindID[0].textContent = `Wind: ${wind_speed} mph`
+        sectionWindID[0].textContent = `Wind: ${wind_speed} mph`;
 
         // set to search History array
         searchHistory.currentWeatherIcon.unshift(response.current.weather[0].icon);
@@ -237,28 +294,103 @@ const app = {
             }
         }).join('');
 
+        // reusable function for searchHistory section
+        function searchHistoryWeatherIcon(arrayNumber) {
+            let historyIcon = searchHistory.currentWeatherIcon[arrayNumber];
+
+                    if (historyIcon == '01d') {
+                        sectionWeatherIconID.attr('src', icon01d);
+                    }
+                    else if (historyIcon == '01n') {
+                        sectionWeatherIconID.attr('src', icon01n);
+                    }
+                    else if (historyIcon == '02d') {
+                        sectionWeatherIconID.attr('src', icon02d);
+                    }
+                    else if (historyIcon == '02n') {
+                        sectionWeatherIconID.attr('src', icon02n);
+                    }
+                    else if (historyIcon == '03d') {
+                        sectionWeatherIconID.attr('src', icon03d);
+                    }
+                    else if (historyIcon == '03n') {
+                        sectionWeatherIconID.attr('src', icon03n);
+                    }
+                    else if (historyIcon == '04d') {
+                        sectionWeatherIconID.attr('src', icon04d);
+                    }
+                    else if (historyIcon == '04n') {
+                        sectionWeatherIconID.attr('src', icon04n);
+                    }
+                    else if (historyIcon == '09d') {
+                        sectionWeatherIconID.attr('src', icon09d);
+                    }
+                    else if (historyIcon == '09n') {
+                        sectionWeatherIconID.attr('src', icon09n);
+                    }
+                    else if (historyIcon == '10d') {
+                        sectionWeatherIconID.attr('src', icon10d);
+                    }
+                    else if (historyIcon == '10n') {
+                        sectionWeatherIconID.attr('src', icon10n);
+                    }
+                    else if (historyIcon == '11d') {
+                        sectionWeatherIconID.attr('src', icon11d);
+                    }
+                    else if (historyIcon == '11n') {
+                        sectionWeatherIconID.attr('src', icon11n);
+                    }
+                    else if (historyIcon == '13d') {
+                        sectionWeatherIconID.attr('src', icon13d);
+                    }
+                    else if (historyIcon == '13n') {
+                        sectionWeatherIconID.attr('src', icon13n);
+                    }
+                    else if (historyIcon == '50d') {
+                        sectionWeatherIconID.attr('src', icon50d);
+                    }
+                    else if (historyIcon == '50n') {
+                        sectionWeatherIconID.attr('src', icon50n);
+                    }
+        }
+
         // handle search history:
-        for ( var i = 0; i < citiesEl.length; i++ ) {
+        for (var i = 0; i < citiesEl.length; i++) {
             if (searchHistory.cityName[i]) {
                 // show buttons each time a city is searched for
                 citiesEl[i].style.display = 'flex';
                 citiesEl[i].textContent = `${searchHistory.cityName[i]}, ${searchHistory.stateName[i]}, ${searchHistory.countryName[i]}`;
                 // on click of created button, show weather for that location
                 citiesEl.on('click', (event => {
+
                     if (event.target === citiesEl[0]) {
                         sectionCityNameID[0].textContent = `${searchHistory.cityName[0]}, ${searchHistory.stateName[0]}, ${searchHistory.countryName[0]}`;
+                        sectionCurrentDayID[0].textContent = searchHistory.currentDate[0].toDateString();
+                        searchHistoryWeatherIcon(0);
                     }
                     else if (event.target === citiesEl[1]) {
                         sectionCityNameID[0].textContent = `${searchHistory.cityName[1]}, ${searchHistory.stateName[1]}, ${searchHistory.countryName[1]}`;
+                        sectionCurrentDayID[0].textContent = searchHistory.currentDate[1].toDateString();
+                        searchHistoryWeatherIcon(1);
                     }
                     else if (event.target === citiesEl[2]) {
                         sectionCityNameID[0].textContent = `${searchHistory.cityName[2]}, ${searchHistory.stateName[2]}, ${searchHistory.countryName[2]}`;
+                        sectionCurrentDayID[0].textContent = searchHistory.currentDate[2].toDateString();
+                        sectionWeatherIconID.attr('src', historyIcon[2]);
+                        searchHistoryWeatherIcon(2);
+
                     }
                     else if (event.target === citiesEl[3]) {
                         sectionCityNameID[0].textContent = `${searchHistory.cityName[3]}, ${searchHistory.stateName[3]}, ${searchHistory.countryName[3]}`;
+                        sectionCurrentDayID[0].textContent = searchHistory.currentDate[3].toDateString();
+                        searchHistoryWeatherIcon(3);
+
                     }
                     else if (event.target === citiesEl[4]) {
                         sectionCityNameID[0].textContent = `${searchHistory.cityName[4]}, ${searchHistory.stateName[4]}, ${searchHistory.countryName[4]}`;
+                        sectionCurrentDayID[0].textContent = searchHistory.currentDate[4].toDateString();
+                        searchHistoryWeatherIcon(4);
+
                     }
                 }))
 
