@@ -220,8 +220,6 @@ const app = {
         searchHistory.currentWind.unshift(wind_speed);
         searchHistory.currentHumidity.unshift(humidity);
         searchHistory.currentDate.unshift(date);
-        // console.log(searchHistory);
-
 
         // Five Day Forecast:
         let firstDay = response.daily[1];
@@ -372,7 +370,6 @@ const app = {
         }
 
         // reusable function for the current weather
-
         function weatherHistory(index) {
             sectionCityNameID[0].textContent = `${searchHistory.cityName[index]}, ${searchHistory.stateName[index]}, ${searchHistory.countryName[index]}`;
             sectionCurrentDayID[0].textContent = searchHistory.currentDate[index].toDateString();

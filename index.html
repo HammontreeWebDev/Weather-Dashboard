@@ -16,7 +16,6 @@
 </head>
 
 <body class="body-background">
-    <!-- header section -->
 
     <header class="container header-background min-vw-100">
         <div class="row text-center py-3">
@@ -24,8 +23,10 @@
         </div>
     </header>
 
-    <!-- content -->
+    <!-- The actual dashboard -->
     <main class="container d-flex m-0 min-vw-100">
+
+        <!-- Search Fields and Search History -->
         <aside class="col-3 m-3 text-left">
             <h2 class="fs-3 blue-gray-text">Search for a City:</h2>
 
@@ -55,7 +56,8 @@
             </div>
 
         </aside>
-        <!-- top section weather template -->
+
+        <!-- Current Weather -->
         <section class="container">
             <section id="highlight-weather" class="row mt-4 mx-3 p-3">
                 <h2 id="section-city-name" class="col-1 ps-1"></h2>
@@ -67,7 +69,8 @@
                     <li id="section-humidity" class="pt-1"></li>
                 </ul>
             </section>
-            <!-- bottom section weather card template(s) -->
+
+            <!-- Five Day Forecast that will be injected by JavaScript -->
             <section class="row mt-4 mx-3 p-3">
                 <h3 id="forecast-title">5 Day Forecast:</h3>
                 <div id="five-day-forecast">

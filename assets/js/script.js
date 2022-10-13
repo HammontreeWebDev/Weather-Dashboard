@@ -1,11 +1,13 @@
 function initText() {
-    // This section is retrieving the last searched for location name for the top section and checking if local storage exists... if it does not exist, it will default to Atlanta, GA...
+    // upon page load, check local storage for saved data... if none exists, populate with data from Atlanta, GA
+    // However, if it does exist, populate page with that data instead
 
     let geoCity = localStorage.getItem("geoCity");
     let geoState = localStorage.getItem("geoState");
     let geoCountry = localStorage.getItem("geoCountry");
 
     if (geoCity == null ) {
+        // run atlanta.js | for other if statements we will leave this out. It is assumed that if the city name is null, so is the rest of the information.
         atlantaPage.init();
     }
 
@@ -13,13 +15,10 @@ function initText() {
         sectionCityNameID[0].textContent = `${JSON.parse(geoCity)}, ${JSON.parse(geoState)}, ${JSON.parse(geoCountry)}`
     }
 
-    // -----------------------------------------------//
-    // This section will check local storage to see if a value exists pertaining to the current day that weather in a particular location was searched for.. if it does not exist, the value will default to atlantaPage.init() from atlanta.js
     let timeStamp = localStorage.getItem("currentDate");
 
     if (timeStamp === null) {
-        // default to atlanta stats found in atlanta.js
-        atlantaPage.init();
+        // do nothing
     }
 
     else {
@@ -27,12 +26,11 @@ function initText() {
 
         sectionCurrentDayID[0].textContent = `${date.toDateString()}`
     }
-    // -------------------------------------------//
-    // get weather icon from local storage if it exists and place it on page
+
     let weatherIcon = localStorage.getItem("weatherIcon");
 
     if (weatherIcon === null) {
-        // Do Nothing.. if the local storage is null in the first if statement, it should be here too.. don't want to run the function several times
+        // do nothing
     }
 
     else if (weatherIcon == '01d') {
@@ -90,24 +88,21 @@ function initText() {
         sectionWeatherIconID.attr('src', icon50n);
     };
 
-    // get temp, humidity, and wind speed from local storage and if it exists, show for current day section
     let temp = localStorage.getItem("temp");
     let humidity = localStorage.getItem("humidity");
     let wind_speed = localStorage.getItem("windSpeed");
 
     if (sectionTempID[0].textContent === null) {
-        // Do Nothing.. if the local storage is null in the first if statement, it should be here too.. don't want to run the function several times
+        // do nothing
     }
     else {
         sectionTempID[0].textContent = `Temp: ${temp} \u00B0F`;
         sectionHumidityID[0].textContent = `Humidity: ${humidity}%`;
         sectionWindID[0].textContent = `Wind: ${wind_speed} mph`;
     };
-    // -------------------------------------------//
-    
-    // show five day forecast for last searched item using local storage if it exists...
+
     if (fiveDayForecast[0].innerHTML === null) {
-        // Do Nothing.. if the local storage is null in the first if statement, it should be here too.. don't want to run the function several times
+        // do nothing
     }
     else {
         const forecastString = localStorage.getItem("dailyForecast");
