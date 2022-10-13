@@ -459,6 +459,7 @@ const app = {
                 // show buttons each time a city is searched for
                 citiesEl[i].style.display = 'flex';
                 citiesEl[i].textContent = `${searchHistory.cityName[i]}, ${searchHistory.stateName[i]}, ${searchHistory.countryName[i]}`;
+            }
 
                 citiesEl.on('click', (event => {
 
@@ -491,9 +492,6 @@ const app = {
                 }))
 
             }
-        }
-
-
         console.log(searchHistory);
     }
 }
