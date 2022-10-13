@@ -494,7 +494,6 @@ const app = {
                 }))
 
             }
-        console.log(searchHistory);
     }
 }
 

@@ -20,9 +20,9 @@ const autoCompleteForm = {
     },
 
     showCities: (response) => {
-        // use .map to place all city names in an array
+
         const cityNames = response.data.map(({ city }) => city);
-        // set data to local storage to use as source for autocompleteForm form
+
         localStorage.setItem("cityNames", JSON.stringify(cityNames));
         const cityNameStorage = localStorage.getItem("cityNames");
 
@@ -53,10 +53,9 @@ const autoCompleteForm = {
     },
 
     showCountries: (response) => {
-        // console.log(response);
-        // use .map to place all city names in an array
+
         const countryNames = response.data.map(({ Iso2 }) => Iso2);
-        // console.log(countryNames);
+
         localStorage.setItem("countryNames", JSON.stringify(countryNames));
         const countryNameStorage = localStorage.getItem("countryNames");
 
@@ -86,7 +85,6 @@ const autoCompleteForm = {
     },
 
     showStates: (response) => {
-        // console.log(response.data[232].states); for US States
         const stateCodes = response.data[232].states.map(({ state_code }) => state_code);
         localStorage.setItem("stateCodes", JSON.stringify(stateCodes));
         const stateCodeStorage = localStorage.getItem("stateCodes");
