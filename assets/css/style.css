@@ -9,6 +9,9 @@
 
 body {
     font-family: 'Play', sans-serif;
+    /* Photo by Andre Furtado: https://www.pexels.com/photo/lightning-and-gray-clouds-1162251/ */
+    background-image: url('/assets/img/lightning.jpg');
+    background-size: cover;
 }
 
 header {
@@ -17,7 +20,7 @@ header {
 }
 
 .header-background {
-    background-color: var(--header);
+    background-color: rgba(61,199,252,.93);
 }
 
 .body-background {
@@ -90,6 +93,7 @@ header {
     width: 100%;
     position: relative;
     box-shadow: 0 0 3px 3px var(--blue-gray);
+    background-color: rgba(58,142,242,0.93);
 }
 
 .list-style {
@@ -120,7 +124,7 @@ header {
 }
 
 #forecast-body {
-    background-color: var(--blue-gray);
+    background-color: rgba(62,86,115,.93);
 
 }
 
@@ -145,4 +149,12 @@ header {
     color: var(--header);
     border: 4px solid var(--header);
     box-shadow: 0 0 3px 3px var(--main-text);
+}
+
+.search-background {
+    background-color: rgba(58,142,242,0.93);
+    width: max-content;
+    border: 3px solid var(--blue-gray);
+    padding: 1%;
+    border-radius: 20%;
 }
