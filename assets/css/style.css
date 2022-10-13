@@ -10,7 +10,7 @@
 body {
     font-family: 'Play', sans-serif;
     /* Photo by Andre Furtado: https://www.pexels.com/photo/lightning-and-gray-clouds-1162251/ */
-    background-image: url('/assets/img/lightning.jpg');
+    background-image: url('../img/lightning.jpg');
     background-size: cover;
 }
 
