@@ -112,7 +112,7 @@ function initText() {
     else {
         const forecastString = localStorage.getItem("dailyForecast");
         const forecastData = JSON.parse(forecastString);
-        // console.log(forecastData);
+        console.log(forecastData);
 
         fiveDayForecast[0].innerHTML = forecastData.map((day, idx) => {
             if (idx <= 4){
@@ -176,7 +176,7 @@ function initText() {
                 
                 let date = new Date(day.dt * 1000);
 
-        return `<div id="forecast-body" class="card col mx-2">
+        return `<div id="forecast-body" class="card col-lg-2 col-md col-sm m-2">
                 <div class="card-body p-2">
                     <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
                     <img id="forecast-icon" src=${weatherIcon} alt="weather icon">

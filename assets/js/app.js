@@ -70,6 +70,11 @@ const app = {
         let cityName = citySearchID.val();
         let stateName = stateSearchID.val();
         let countryName = countrySearchID.val();
+        // reset value to clear text form after it has been stored in a variable
+        citySearchID[0].value = '';
+        stateSearchID[0].value = '';
+        countrySearchID[0].value = '';
+
         let key = '2c8438a889150a71aa165db59d155f28';
         let geo = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},${stateName},${countryName}&appid=${key}`;
 
@@ -292,7 +297,7 @@ const app = {
                 }
 
                 let date = new Date(day.dt * 1000);
-                return `<div id="forecast-body" class="card col mx-2">
+                return `<div id="forecast-body" class="card col-lg-2 col-md col-sm m-2">
                 <div class="card-body p-2">
                     <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
                     <img id="forecast-icon" src=${weatherIcon} alt="weather icon">
@@ -438,7 +443,7 @@ const app = {
                     }
     
                     let date = new Date(day.dt * 1000);
-                    return `<div id="forecast-body" class="card col mx-2">
+                    return `<div id="forecast-body" class="card col-lg-2 col-md col-sm m-2">
                     <div class="card-body p-2">
                         <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
                         <img id="forecast-icon" src=${weatherIcon} alt="weather icon">

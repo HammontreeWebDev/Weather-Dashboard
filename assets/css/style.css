@@ -11,6 +11,11 @@ body {
     font-family: 'Play', sans-serif;
 }
 
+header {
+    border: 4px solid var(--blue-gray);
+    margin-bottom: .5%;
+}
+
 .header-background {
     background-color: var(--header);
 }
@@ -128,6 +133,16 @@ body {
 #forecast-date {
     color: var(--main-text);
 }
+
 #five-day-forecast {
     display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+}
+
+#sub-header {
+    background-color: var(--blue-gray);
+    color: var(--header);
+    border: 4px solid var(--header);
+    box-shadow: 0 0 3px 3px var(--main-text);
 }
