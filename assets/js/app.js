@@ -300,9 +300,9 @@ const app = {
                     <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
                     <img id="forecast-icon" src=${weatherIcon} alt="weather icon">
                     <ul class="p-0">
-                        <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} </li>
-                        <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} </li>
-                        <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity} </li>
+                        <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} \u00B0F</li>
+                        <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} mph </li>
+                        <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity}% </li>
                     </ul>
                 </div>
             </div>`
@@ -445,9 +445,9 @@ const app = {
                         <h5 id="forecast-date" class="card-title">${date.toDateString()}</h5>
                         <img id="forecast-icon" src=${weatherIcon} alt="weather icon">
                         <ul class="p-0">
-                            <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} </li>
-                            <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} </li>
-                            <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity} </li>
+                            <li id="forecast-temp" class="list-style">Temp: ${day.temp.day} \u00B0F </li>
+                            <li id="forecast-wind" class="list-style">Wind: ${day.wind_speed} mph</li>
+                            <li id="forecast-humidity" class="list-style">Humidity: ${day.humidity}% </li>
                         </ul>
                     </div>
                 </div>`
